@@ -4,10 +4,9 @@
 
 This Solidity program is a simple program that demonstrates creating a token while implementing the require(), assert() and revert() statements.
 
-The contract has two functions:
+The contract has three functions:
 
-mint function
-burn function
+mint function, burn function, transfer function
 
 ## Getting Started
 
