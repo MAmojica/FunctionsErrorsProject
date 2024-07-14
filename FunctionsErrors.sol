@@ -1,44 +1,52 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity 0.8.26;
 
-contract FunctionsErrors {
-    address public owner;
-    uint public balance;
+contract Holocoin {
 
-    constructor() {
-        owner = msg.sender;
-        balance = 0;
+    // Public variables
+    string public name = "HOLOCOIN";
+    string public abbrv = "HLO";
+    uint public supply = 0;
+
+    // Mapping variable
+    mapping(address => uint) public balances;
+
+    // Mint function
+    function mint(address _address, uint _value) public {
+        require(_value > 0, "Value must be greater than 0"); // Using require() to check the value
+
+        uint oldSupply = supply;
+        supply += _value;
+        balances[_address] += _value;
+        
+        // Using assert to ensure the supply was correctly updated
+        assert(supply == oldSupply + _value);
     }
 
-    // Function to deposit ether into the contract
-    function deposit() public payable {
-        require(msg.value > 0, "Deposit value must be greater than zero.");
-        balance += msg.value;
+    // Burn function
+    function burn(address _address, uint _value) public {
+        require(balances[_address] >= _value, "Not enough balance to burn"); // Using require() to check balance
+        
+        uint oldSupply = supply;
+        supply -= _value;
+        balances[_address] -= _value;
+        
+        // Using assert to ensure the supply was correctly updated
+        assert(supply == oldSupply - _value);
     }
 
-    // Function to withdraw ether from the contract
-    function withdraw(uint amount) public {
-        require(msg.sender == owner, "Only the owner can withdraw funds.");
-        require(amount <= balance, "Insufficient balance.");
+    // Function that uses revert()
+    function transfer(address _to, uint _value) public {
+        // Check if sender has enough balance
+        if (balances[msg.sender] < _value) {
+            revert("Insufficient balance for transfer"); // Using revert() to handle insufficient balance
+        }
 
-        balance -= amount;
-        payable(owner).transfer(amount);
-    }
+        // Perform transfer
+        balances[msg.sender] -= _value;
+        balances[_to] += _value;
 
-    // Function to test assert
-    function testAssert() public view {
-        // Using assert to check for an invariant condition
-        assert(balance >= 0);
-    }
-
-    // Function to demonstrate revert
-    function triggerRevert() public pure {
-        revert("This is a forced revert.");
-    }
-
-    // Function to reset the contract state
-    function resetContract() public {
-        require(msg.sender == owner, "Only the owner can reset the contract.");
-        balance = 0;
+        // Using assert to check that sender's balance did not underflow
+        assert(balances[msg.sender] + _value >= balances[msg.sender]);
     }
 }
