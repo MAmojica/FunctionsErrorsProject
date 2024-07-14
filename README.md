@@ -1,57 +1,25 @@
 # FunctionsErrors README
 
-## Overview
+## Description
 
-This Solidity smart contract, `FunctionsErrors`, demonstrates the usage of `require()`, `assert()`, and `revert()` statements to manage conditions, enforce invariants, and handle errors in Ethereum smart contracts.
+This Solidity program is a simple program that demonstrates creating a token while implementing the require(), assert() and revert() statements.
 
-## Contract Functionality
+The contract has two functions:
 
-### Contract Deployment
+mint function
+burn function
 
-The contract initializes with the following:
-- `owner`: The address that deploys the contract becomes the owner.
-- `balance`: Initial balance is set to 0.
+## Getting Started
 
-### Functions
+### Executing program
 
-### **1. deposit()**
-   - **Description**: Allows users to deposit Ether into the contract.
-   - **Usage**: Call this function with a positive value of Ether to add funds to the contract balance.
-   - **Requirements**: Requires the deposited value to be greater than zero.
+To run this program, you can use Remix, an online Solidity IDE. To get started, go to the Remix website at https://remix.ethereum.org/.
 
-### **2. withdraw(uint amount)**
-   - **Description**: Allows the contract owner to withdraw Ether from the contract balance.
-   - **Usage**: Only the contract owner can call this function to withdraw a specified amount of Ether.
-   - **Requirements**: Requires the caller to be the contract owner and ensures that the contract has sufficient balance for withdrawal.
+Once you are on the Remix website, create a new file by clicking on the "+" icon in the left-hand sidebar. Save the file with a .sol extension (e.g., HelloWorld.sol). Copy and paste the code from the holocoin.sol file.
 
-### **3. testAssert()**
-   - **Description**: Tests the `assert()` statement.
-   - **Usage**: View function that checks an invariant condition (balance should always be non-negative) using `assert()`.
+To compile the code, click on the "Solidity Compiler" tab in the left-hand sidebar. Make sure the "Compiler" option is set to "0.8.4" (or another compatible version), and then click on the "Compile HelloWorld.sol" button.
 
-### **4. triggerRevert()**
-   - **Description**: Demonstrates the `revert()` statement.
-   - **Usage**: Pure function that intentionally triggers a revert with a custom error message.
+Once the code is compiled, you can deploy the contract by clicking on the "Deploy & Run Transactions" tab in the left-hand sidebar. Select the contract from the dropdown menu, and then click on the "Deploy" button.
 
-### **5. resetContract()**
-   - **Description**: Allows the contract owner to reset the contract state.
-   - **Usage**: Only the contract owner can call this function to reset the contract balance to zero.
-
-### Error Handling
-
-- **require()**: Used throughout the contract to enforce pre-conditions (e.g., valid input values, ownership).
-- **assert()**: Used to check for invariants (e.g., ensuring the balance is non-negative).
-- **revert()**: Used for intentional error triggering with custom error messages.
-
-### Usage
-
-1. Deploy the contract on a test network or local blockchain.
-2. Interact with the contract using wallet applications or through scripts.
-3. Use `deposit()` to add funds, `withdraw()` to retrieve funds, `testAssert()` to check invariants, and `triggerRevert()` to observe revert behavior.
-4. Only the contract owner can reset the contract state using `resetContract()`.
-
-### Security Considerations
-
-- Ensure that only trusted addresses interact with critical functions like `withdraw()` and `resetContract()`.
-- Test the contract thoroughly on test networks before deploying to the mainnet.
-- Consider adding additional security features such as access control mechanisms depending on the specific use case.
+Once the contract is deployed, you can interact with it by calling the mint function to add specific number of tokens to the supply or burn function to burn a specific number of tokens. Once you filled the address and value in your chosen function, click on the "transact" button to execute the function and you'll see a message from the console.
 
