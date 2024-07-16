@@ -6,7 +6,7 @@ This Solidity program is a simple program that demonstrates creating a token whi
 
 The contract has three functions:
 
-mint function, burn function, transfer function
+setValue function, doubleValue function, tryToSetValueToZero function
 
 ## Getting Started
 
